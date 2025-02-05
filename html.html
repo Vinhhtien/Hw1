@@ -3,36 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Preview</title>
+    <title>Interactive Photo Gallery</title>
     <style>
-        #image {
-            width: 500px;
-            height: 300px;
-            border: 2px solid black;
+        .gallery {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            background-size: cover;
-            background-position: center;
+            flex-wrap: wrap;
         }
-        img {
-            width: 100px;
-            height: 100px;
+        .gallery img {
+            width: 200px;
+            height: 150px;
             margin: 10px;
-            cursor: pointer;
+            border: 2px solid #ccc;
+            transition: transform 0.3s;
+        }
+        .gallery img:hover, .gallery img:focus {
+            transform: scale(1.1);
+            border-color: #333;
         }
     </style>
+    <script>
+        function addTabFocusAttribute() {
+            let images = document.querySelectorAll('.gallery img');
+            images.forEach((img, index) => {
+                img.setAttribute("tabindex", "0");
+                img.addEventListener("mouseover", () => console.log("Mouse over image " + (index + 1)));
+                img.addEventListener("mouseleave", () => console.log("Mouse left image " + (index + 1)));
+                img.addEventListener("focus", () => console.log("Image " + (index + 1) + " focused"));
+                img.addEventListener("blur", () => console.log("Image " + (index + 1) + " blurred"));
+            });
+        }
+        
+        window.onload = function() {
+            console.log("Page loaded");
+            addTabFocusAttribute();
+        };
+    </script>
 </head>
 <body>
-    <div id="image">Hover over an image below to display here.</div>
-
-    <div>
-        <img src="image1.jpg" alt="First Image" onmouseover="upDate(this)" onmouseout="undo()">
-        <img src="image2.jpg" alt="Second Image" onmouseover="upDate(this)" onmouseout="undo()">
-        <img src="image3.jpg" alt="Third Image" onmouseover="upDate(this)" onmouseout="undo()">
+    <h1>Interactive Photo Gallery</h1>
+    <div class="gallery">
+        <img src="image1.jpg" alt="Beautiful sunrise over mountains">
+        <img src="image2.jpg" alt="A tranquil beach scene with palm trees">
+        <img src="image3.jpg" alt="A vibrant city skyline at night">
+        <img src="image4.jpg" alt="A peaceful countryside landscape">
+        <img src="image5.jpg" alt="A stunning waterfall in a forest">
+        <img src="image6.jpg" alt="A snowy mountain peak under clear skies">
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
